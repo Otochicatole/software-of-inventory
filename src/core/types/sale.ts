@@ -10,5 +10,6 @@ export interface SaleItem {
     totalAmount: number;
     items: SaleItem[];
     createdAt: Date;
+    active: boolean;
   }
   

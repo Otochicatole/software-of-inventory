@@ -1,8 +1,9 @@
 import { Product } from "@/core/types/product";
 
-export const updateProduct = async (product: Product): Promise<Product | null> => {
-  try {
-    const response = await fetch('/api/products/update', {
+export const updateProduct = async (product: Partial<Product> & { id: number, categoryIds?: number[] }): Promise<Product | null> => {
+    const HOST = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    try {
+    const response = await fetch(HOST+'/api/products/update', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -1,20 +1,16 @@
-import { Product } from "@/core/types/product";
+import { Sale, SaleItem } from "@/core/types/sale";
 
-interface Sale {
-    id: number;
-    products: Product[];
-    total: number;
-    createdAt: Date;
-}
+type CreateSaleItem = Omit<SaleItem, 'id'>;
 
-export const createSale = async (sale: Omit<Sale, 'id' | 'createdAt'>): Promise<Sale | null> => {
-  try {
-    const response = await fetch('/api/sales/create', {
+export const createSale = async (items: CreateSaleItem[]): Promise<Sale | null> => {
+    const HOST = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    try {
+    const response = await fetch(HOST+'/api/sales/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(sale),
+      body: JSON.stringify({ items }),
     });
     if (!response.ok) {
       throw new Error('Failed to create sale');

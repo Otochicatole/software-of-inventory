@@ -1,6 +1,7 @@
 export const deleteSale = async (id: number): Promise<boolean> => {
-  try {
-    const response = await fetch('/api/sales/delete', {
+    const HOST = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    try {
+    const response = await fetch(HOST+'/api/sales/delete', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

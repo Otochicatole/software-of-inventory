@@ -1,0 +1,265 @@
+.tableContainer {
+    width: 100%;
+    padding: 20px;
+    overflow-x: auto;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.stockTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+
+        tr th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+
+            @media (max-width: 768px) {
+                padding: 12px 8px;
+                font-size: 12px;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.4s ease-out;
+
+            &:hover {
+                background-color: #f9fafb;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            td {
+                padding: 16px;
+                font-size: 14px;
+                color: #374151;
+                transition: all 0.3s ease;
+
+                @media (max-width: 768px) {
+                    padding: 12px 8px;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+.stockRow {
+    cursor: pointer;
+}
+
+.alignLeft {
+    text-align: left !important;
+}
+
+.alignCenter {
+    text-align: center !important;
+}
+
+
+
+.stockName {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.stockDescription {
+    color: #6b7280;
+    font-size: 13px;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (max-width: 768px) {
+        max-width: 150px;
+    }
+}
+
+.stockCategories {
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+.categoriesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.categoryBadge {
+    font-size: 11px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    font-weight: 500;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    animation: fadeIn 0.5s ease-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.noCategory {
+    font-size: 12px;
+    color: #9ca3af;
+    font-style: italic;
+}
+
+.stockPrice {
+    font-weight: 600;
+    color: #059669;
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+.stockStock {
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+.stockBadge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeIn 0.5s ease-out;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.lowStock {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.mediumStock {
+    background-color: #fef3c7;
+    color: #d97706;
+}
+
+.highStock {
+    background-color: #d1fae5;
+    color: #059669;
+}
+
+.stockActions {
+    text-align: center !important;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.editButton,
+.deleteButton {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    opacity: 0.8;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.1);
+        opacity: 1;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+        transform: translateY(0) scale(0.95);
+    }
+}
+
+.editButton {
+    color: #3b82f6;
+
+    &:hover {
+        background-color: #dbeafe;
+    }
+}
+
+.deleteButton {
+    color: #ef4444;
+
+    &:hover {
+        background-color: #fee2e2;
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 14px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Stagger animation para las filas */
+.stockTable tbody tr:nth-child(1) { animation-delay: 0s; }
+.stockTable tbody tr:nth-child(2) { animation-delay: 0.05s; }
+.stockTable tbody tr:nth-child(3) { animation-delay: 0.1s; }
+.stockTable tbody tr:nth-child(4) { animation-delay: 0.15s; }
+.stockTable tbody tr:nth-child(5) { animation-delay: 0.2s; }
+.stockTable tbody tr:nth-child(6) { animation-delay: 0.25s; }
+.stockTable tbody tr:nth-child(7) { animation-delay: 0.3s; }
+.stockTable tbody tr:nth-child(8) { animation-delay: 0.35s; }
+.stockTable tbody tr:nth-child(9) { animation-delay: 0.4s; }
+.stockTable tbody tr:nth-child(10) { animation-delay: 0.45s; }

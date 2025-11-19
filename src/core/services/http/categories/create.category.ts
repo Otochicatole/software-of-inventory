@@ -1,8 +1,9 @@
 import { Category } from "@/core/types/category";
 
-export const createCategory = async (category: Omit<Category, 'id'>): Promise<Category | null> => {
-  try {
-    const response = await fetch('/api/categories/create', {
+export const createCategory = async (category: Omit<Category, 'id' | 'createdAt' | 'updatedAt'>): Promise<Category | null> => {
+    const HOST = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    try {
+    const response = await fetch(HOST+'/api/categories/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,8 +1,9 @@
 import { Product } from "@/core/types/product";
 
-export const createProduct = async (product: Omit<Product, 'id'>): Promise<Product | null> => {
-  try {
-    const response = await fetch('/api/products/create', {
+export const createProduct = async (product: Omit<Product, 'id' | 'categories' | 'createdAt' | 'updatedAt'> & { categoryIds: number[] }): Promise<Product | null> => {
+    const HOST = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    try {
+    const response = await fetch(HOST+'/api/products/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

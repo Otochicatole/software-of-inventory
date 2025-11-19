@@ -1,0 +1,89 @@
+.categoryItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    transition: all 0.2s;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-color: #adb5bd;
+    }
+
+    @media (max-width: 768px) {
+        padding: 0.75rem;
+    }
+}
+
+.categoryInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.categoryName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+    }
+}
+
+.categoryDescription {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
+
+    @media (max-width: 768px) {
+        font-size: 0.85rem;
+    }
+}
+
+.categoryActions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.editButton,
+.deleteButton {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.editButton {
+    background-color: #e7f3ff;
+    border-radius: 100%;
+    transition: all 0.2s;
+    color: #0066cc;
+
+    &:hover {
+        background-color: #cce5ff;
+        color: #0052a3;
+    }
+}
+
+.deleteButton {
+    background-color: #ffe5e5;
+    border-radius: 100%;
+    transition: all 0.2s;
+    color: #dc3545;
+
+    &:hover {
+        background-color: #ffcccc;
+        color: #c82333;
+    }
+}
