@@ -94,6 +94,11 @@ Content-Type: application/json
 }
 
 ###
+### Obtener todas las ventas
+GET http://localhost:3000/api/sales/get
+
+###
+### Crear una venta
 POST http://localhost:3000/api/sales/create
 Content-Type: application/json
 
@@ -105,6 +110,7 @@ Content-Type: application/json
 }
 
 ###
+### Anular una venta
 DELETE http://localhost:3000/api/sales/delete
 Content-Type: application/json
 

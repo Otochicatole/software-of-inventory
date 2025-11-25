@@ -7,46 +7,69 @@ interface Product {
     price: number;
 }
 
-export async function  POST(req: Request){
+export async function POST(req: Request) {
     try {
         const { items } = await req.json()
 
-        if(!items || !Array.isArray(items) || items.length === 0 ) {
+        if (!items || !Array.isArray(items) || items.length === 0) {
             return NextResponse.json({ error: "The items were not received." }, { status: 400 });
         }
 
+        for (const item of items) {
+            const product = await prisma.product.findUnique({
+                where: { id: item.productId }
+            });
+
+            if (!product) {
+                return NextResponse.json({ 
+                    error: `Product with ID ${item.productId} not found.` 
+                }, { status: 404 });
+            }
+
+            if (product.stock < item.quantity) {
+                return NextResponse.json({ 
+                    error: `Insufficient stock for product "${product.name}". Available: ${product.stock}, Requested: ${item.quantity}` 
+                }, { status: 400 });
+            }
+        }
+
         let total = 0;
-        items.forEach((item: Product)=> {
+        items.forEach((item: Product) => {
             total += item.price * item.quantity;
         })
 
         const sale = await prisma.sale.create({
-            data:{
+            data: {
                 totalAmount: total,
-                items:{
-                    create: items.map((item: Product)=>({
+                items: {
+                    create: items.map((item: Product) => ({
                         productId: item.productId,
                         quantity: item.quantity,
                         price: item.price
                     })),
                 },
             },
-            include: { items: true }
+            include: { 
+                items: {
+                    include: {
+                        product: true
+                    }
+                }
+            }
         })
 
-        for(const item of items){
+        for (const item of items) {
             await prisma.product.update({
-                where: { id:item.productId },
-                data: { stock: { decrement: item.quantity }, },
+                where: { id: item.productId },
+                data: { stock: { decrement: item.quantity } },
             })
         }
 
         return NextResponse.json(sale)
 
-    } catch (error){
+    } catch (error) {
         console.log(error)
 
         return NextResponse.json({ error: "Error creating sale" }, { status: 500 })
     }
-
 }

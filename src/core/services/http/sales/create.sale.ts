@@ -1,6 +1,4 @@
-import { Sale, SaleItem } from "@/core/types/sale";
-
-type CreateSaleItem = Omit<SaleItem, 'id'>;
+import { Sale, CreateSaleItem } from "@/core/types/sale";
 
 export const createSale = async (items: CreateSaleItem[]): Promise<Sale | null> => {
     const HOST = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';

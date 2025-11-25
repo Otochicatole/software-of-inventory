@@ -13,6 +13,8 @@ interface InputProps {
   required?: boolean;
   disabled?: boolean;
   name?: string;
+  min?: string | number;
+  max?: string | number;
 }
 
 export default function Input({
@@ -26,6 +28,8 @@ export default function Input({
   required = false,
   disabled = false,
   name,
+  min,
+  max,
 }: InputProps) {
   const [internalValue, setInternalValue] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -66,6 +70,8 @@ export default function Input({
         required={required}
         disabled={disabled}
         name={name}
+        min={min}
+        max={max}
       />
       {error && <p className={styles.errorMessage}>{error}</p>}
     </>
