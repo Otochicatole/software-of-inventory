@@ -5,6 +5,7 @@ import { Sale } from "@/core/types/sale";
 import { deleteSale } from "@/core/services/http/sales/delete.sale";
 import SalesList from "./sales-list";
 import SalesFilters from "./sales-filters";
+import ActiveDateFilters from "./active-date-filters";
 import FormCreateSale from "./form-create-sale";
 import SaleDetails from "./sale-details";
 import SaleConfirmDelete from "./sale-confirm-delete";
@@ -69,6 +70,11 @@ export default function SalesPage({ initialSales }: SalesPageProps) {
     const handleFilterChange = (startDate: Date | null, endDate: Date | null) => {
         setStartDateFilter(startDate);
         setEndDateFilter(endDate);
+    };
+
+    const handleClearDateFilters = () => {
+        setStartDateFilter(null);
+        setEndDateFilter(null);
     };
 
     const filteredSales = useMemo(() => {
@@ -142,6 +148,12 @@ export default function SalesPage({ initialSales }: SalesPageProps) {
                     <SalesFilters onFilterChange={handleFilterChange} />
                 </div>
             </header>
+
+            <ActiveDateFilters
+                startDate={startDateFilter}
+                endDate={endDateFilter}
+                onClearFilters={handleClearDateFilters}
+            />
 
             <SalesList
                 sales={hasActiveFilter ? filteredSales : sales}

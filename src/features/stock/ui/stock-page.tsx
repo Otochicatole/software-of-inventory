@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import StockList from "./stock-list";
+import ActiveFiltersDisplay from "./active-filters-display";
 import { useStockFilters } from "../hooks/use-stock-filters";
 import { SortField, SortOrder } from "../enums/fileters-enums";
 import { StockLevelFilter } from "../constants/stock-thresholds";
@@ -64,6 +65,20 @@ export default function StockPage({ stock: initialStock }: { stock: Product[] })
         setSelectedProduct(null);
     };
 
+    const handleRemoveFilter = (filterKey: string) => {
+        switch (filterKey) {
+            case "stockLevel":
+                setStockLevel(StockLevelFilter.All);
+                break;
+            case "stockRange":
+                setStockRange(undefined, undefined);
+                break;
+            case "sort":
+                setSort(SortField.Name, SortOrder.Ascending);
+                break;
+        }
+    };
+
 
     return (
         <>
@@ -90,6 +105,12 @@ export default function StockPage({ stock: initialStock }: { stock: Product[] })
                     Filtros <Funnel size={13} />
                 </button>
             </header>
+            
+            <ActiveFiltersDisplay 
+                filters={filters}
+                onRemoveFilter={handleRemoveFilter}
+            />
+            
             <StockList
                 stock={filteredProducts}
                 onDelete={handleProductDeleted}
@@ -115,6 +136,7 @@ export default function StockPage({ stock: initialStock }: { stock: Product[] })
                         onStockLevelChange={setStockLevel}
                         onStockRangeChange={setStockRange}
                         onResetFilters={resetFilters}
+                        onClose={handleCloseModal}
                     />
                 )}
             </Modal>

@@ -13,6 +13,7 @@ interface StockFiltersProps {
     onStockLevelChange: (level: StockLevelFilter) => void;
     onStockRangeChange: (min?: number, max?: number) => void;
     onResetFilters: () => void;
+    onClose?: () => void;
 }
 
 export default function StockFiltersComponent({
@@ -20,8 +21,14 @@ export default function StockFiltersComponent({
     onSortChange,
     onStockLevelChange,
     onStockRangeChange,
-    onResetFilters
+    onResetFilters,
+    onClose
 }: StockFiltersProps) {
+    
+    const handleResetFilters = () => {
+        onResetFilters();
+        onClose?.();
+    };
     const sortFieldOptions = [
         { value: SortField.Name, label: "Nombre" },
         { value: SortField.Price, label: "Precio" },
@@ -128,14 +135,24 @@ export default function StockFiltersComponent({
                 />
             </div>
 
-            <Button
-                variant="secondary"
-                fullWidth
-                onClick={onResetFilters}
-                type="button"
-            >
-                🔄 Limpiar Filtros
-            </Button>
+            <div className={styles.actions}>
+                <Button
+                    variant="secondary"
+                    fullWidth
+                    onClick={handleResetFilters}
+                    type="button"
+                >
+                    🔄 Limpiar Filtros
+                </Button>
+                <Button
+                    variant="primary"
+                    fullWidth
+                    onClick={onClose}
+                    type="button"
+                >
+                    Aceptar
+                </Button>
+            </div>
         </div>
     );
 }
