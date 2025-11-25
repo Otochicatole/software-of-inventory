@@ -1,9 +1,12 @@
-import DashboardPage from "@/features/dashboard/ui/dashboard-page";
+import StockPage from "@/features/stock/ui/stock-page";
+import { getProducts } from "@/core/services/http/products/get.products";
 
-export default function Home() {
+export default async function Home() {
+  const stock = await getProducts();
+  
   return (
     <>
-      <DashboardPage />
+      <StockPage stock={stock} />
     </>
   );
 }
