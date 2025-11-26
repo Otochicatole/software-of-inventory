@@ -16,11 +16,16 @@ function showErrorDialog(title: string, message: string) {
 async function createWindow() {
     Menu.setApplicationMenu(null);
     
+    const iconPath = isDev 
+        ? path.join(__dirname, '..', 'public', 'logo.ico')
+        : path.join(process.resourcesPath, 'app', 'public', 'logo.ico');
+    
     mainWindow = new BrowserWindow({
         width: 1400,
         height: 900,
         minWidth: 1024,
         minHeight: 768,
+        icon: iconPath,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: false,

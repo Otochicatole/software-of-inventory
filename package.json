@@ -48,9 +48,9 @@
   },
   "build": {
     "appId": "com.etheon.productmanagement",
-    "productName": "Etheon",
+    "productName": "Etheon - Product Management",
     "directories": {
-      "output": "dist-electron"
+      "output": "release"
     },
     "files": [
       "dist/electron/**/*",
@@ -86,21 +86,27 @@
           "arch": ["x64"]
         }
       ],
-      "icon": "public/logo.png",
+      "icon": "public/logo.ico",
       "signAndEditExecutable": false,
       "signingHashAlgorithms": []
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "installerIcon": "public/logo.ico",
+      "uninstallerIcon": "public/logo.ico",
+      "license": false,
+      "deleteAppDataOnUninstall": false,
+      "differentialPackage": false
     },
     "mac": {
       "target": [
         "dmg"
       ],
-      "icon": "public/logo.png",
       "category": "public.app-category.business"
     },
     "linux": {
@@ -108,7 +114,6 @@
         "AppImage",
         "deb"
       ],
-      "icon": "public/logo.png",
       "category": "Office"
     }
   }
