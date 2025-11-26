@@ -4,8 +4,8 @@
   "private": true,
   "main": "dist/electron/main.js",
   "author": {
-    "name": "Otochi",
-    "email": "your-email@example.com"
+    "name": "Otochi - Etheon Software",
+    "email": "etheonsa@gmail.com"
   },
   "description": "Etheon - Product Management System",
   "scripts": {
