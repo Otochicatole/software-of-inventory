@@ -20,9 +20,6 @@ export default function ActiveFiltersDisplay({ filters, onRemoveFilter }: Active
             case StockLevelFilter.Low:
                 levelLabel = "Stock Bajo";
                 break;
-            case StockLevelFilter.Medium:
-                levelLabel = "Stock Medio";
-                break;
             case StockLevelFilter.High:
                 levelLabel = "Stock Alto";
                 break;
