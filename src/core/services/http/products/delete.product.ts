@@ -1,4 +1,4 @@
-export const deleteProduct = async (id: number): Promise<boolean> => {
+export const deleteProduct = async (id: number): Promise<{ success: boolean; error?: string }> => {
     const HOST = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     try {
         const response = await fetch(HOST + '/api/products/delete', {
@@ -8,12 +8,22 @@ export const deleteProduct = async (id: number): Promise<boolean> => {
             },
             body: JSON.stringify({id}),
         });
+        
+        const data = await response.json();
+        
         if (!response.ok) {
-            throw new Error('Failed to delete product');
+            if (response.status === 409) {
+                return { 
+                    success: false, 
+                    error: `No se puede eliminar el producto porque tiene ${data.salesCount} venta${data.salesCount > 1 ? 's' : ''} asociada${data.salesCount > 1 ? 's' : ''}.` 
+                };
+            }
+            return { success: false, error: data.error || 'Error al eliminar el producto' };
         }
-        return true;
+        
+        return { success: true };
     } catch (error) {
         console.error(error);
-        return false;
+        return { success: false, error: 'Error de conexión al eliminar el producto' };
     }
 };

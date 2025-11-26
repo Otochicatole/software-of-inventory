@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Etheon - Sistema de Gestión",
-  description: "Sistema profesional de gestión de inventario y ventas",
+  title: "Etheon - Product Management",
+  description: "Professional product management and inventory system",
 };
 
 export default function RootLayout({

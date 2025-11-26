@@ -12,6 +12,7 @@ import FormAddStock from "@/features/stock/ui/form-add-stock";
 import FormUpdateStock from "@/features/stock/ui/form-update-stock";
 import CategoryManager from "@/features/stock/ui/category-manager";
 import StockFiltersComponent from "@/features/stock/ui/stock-filters";
+import ProductConfirmDelete from "@/features/stock/ui/product-confirm-delete";
 import { Product } from "@/core/types/product";
 import { deleteProduct } from "@/core/services/http/products/delete.product";
 import { ModalStockType } from "../enums/stock-enums";
@@ -53,12 +54,28 @@ export default function StockPage({ stock: initialStock }: { stock: Product[] })
         setSelectedProduct(null);
     };
 
-    const handleProductDeleted = async (id: number) => {
-        const result = await deleteProduct(id);
-        if (result) {
-            setStock(prevStock => prevStock.filter(product => product.id !== id));
+    const handleRequestDelete = (id: number) => {
+        const product = stock.find(p => p.id === id);
+        if (product) {
+            setSelectedProduct(product);
+            setModalType(ModalStockType.ConfirmDelete);
         }
-    }
+    };
+
+    const handleConfirmDelete = async () => {
+        if (!selectedProduct) return;
+
+        const result = await deleteProduct(selectedProduct.id);
+        if (result.success) {
+            setStock(prevStock => prevStock.filter(product => product.id !== selectedProduct.id));
+            setModalType(null);
+            setSelectedProduct(null);
+        } else {
+            alert(result.error || 'Error al eliminar el producto');
+            setModalType(null);
+            setSelectedProduct(null);
+        }
+    };
 
     const handleCloseModal = () => {
         setModalType(null);
@@ -113,7 +130,7 @@ export default function StockPage({ stock: initialStock }: { stock: Product[] })
             
             <StockList
                 stock={filteredProducts}
-                onDelete={handleProductDeleted}
+                onDelete={handleRequestDelete}
                 onEdit={handleProductEdit}
             />
             <Modal isOpen={modalType !== null} onClose={handleCloseModal}>
@@ -137,6 +154,13 @@ export default function StockPage({ stock: initialStock }: { stock: Product[] })
                         onStockRangeChange={setStockRange}
                         onResetFilters={resetFilters}
                         onClose={handleCloseModal}
+                    />
+                )}
+                {modalType === ModalStockType.ConfirmDelete && selectedProduct && (
+                    <ProductConfirmDelete
+                        product={selectedProduct}
+                        onConfirm={handleConfirmDelete}
+                        onCancel={handleCloseModal}
                     />
                 )}
             </Modal>

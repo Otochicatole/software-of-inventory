@@ -38,12 +38,24 @@ export async function POST(req: Request) {
             total += item.price * item.quantity;
         })
 
+        const productsData = await prisma.product.findMany({
+            where: {
+                id: { in: items.map((item: Product) => item.productId) }
+            }
+        });
+
+        const productNamesById = productsData.reduce((acc, product) => {
+            acc[product.id] = product.name;
+            return acc;
+        }, {} as Record<number, string>);
+
         const sale = await prisma.sale.create({
             data: {
                 totalAmount: total,
                 items: {
                     create: items.map((item: Product) => ({
                         productId: item.productId,
+                        productName: productNamesById[item.productId] || 'Producto desconocido',
                         quantity: item.quantity,
                         price: item.price
                     })),

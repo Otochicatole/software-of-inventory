@@ -49,7 +49,7 @@ export default function SaleDetails({ sale }: SaleDetailsProps) {
                         {sale.items.map((item) => (
                             <tr key={item.id}>
                                 <td className={styles.productName}>
-                                    {item.product?.name || `Producto ID ${item.productId}`}
+                                    {item.productName || item.product?.name || 'Producto eliminado'}
                                 </td>
                                 <td className={styles.alignCenter}>{item.quantity}</td>
                                 <td className={styles.alignRight}>${item.price.toFixed(2)}</td>

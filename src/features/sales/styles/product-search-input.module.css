@@ -139,7 +139,6 @@
 
     &.highlighted {
         background: #ede9fe;
-        border-left: 3px solid #667eea;
     }
 }
 

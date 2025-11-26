@@ -3,4 +3,5 @@ export enum ModalStockType {
     Update = "Update",
     Category = "Category",
     Filters = "Filters",
+    ConfirmDelete = "ConfirmDelete",
 }
