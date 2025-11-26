@@ -1,5 +1,5 @@
 {
-  "name": "etheon",
+  "name": "Etheon-Management",
   "version": "0.1.0",
   "private": true,
   "main": "dist/electron/main.js",
@@ -16,9 +16,9 @@
     "build:all": "npm run build && npm run build:electron",
     "start": "next start",
     "electron": "electron .",
-    "pack": "npm run build:all && electron-builder --dir",
+    "pack": "npm run build:all && electron-builder --dir && node scripts/apply-icon.js",
     "dist": "npm run build:all && electron-builder",
-    "dist:win": "npm run build:all && electron-builder --win",
+    "dist:win": "npm run build:all && electron-builder --win --dir && node scripts/apply-icon.js && electron-builder build --win --prepackaged release/win-unpacked",
     "dist:mac": "npm run build:all && electron-builder --mac",
     "dist:linux": "npm run build:all && electron-builder --linux",
     "lint": "eslint",
@@ -42,13 +42,15 @@
     "electron-builder": "^25.1.8",
     "eslint": "9.37.0",
     "eslint-config-next": "15.5.5",
+    "png-to-ico": "^3.0.1",
     "prisma": "6.19.0",
+    "rcedit": "^4.0.1",
     "typescript": "5.9.3",
     "wait-on": "^8.0.5"
   },
   "build": {
-    "appId": "com.etheon.productmanagement",
-    "productName": "Etheon - Product Management",
+    "appId": "com.etheon.management",
+    "productName": "Etheon - Management",
     "directories": {
       "output": "release"
     },
@@ -71,19 +73,25 @@
       {
         "from": ".next/standalone",
         "to": "app",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       },
       {
         "from": "prisma",
         "to": "app/prisma",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       }
     ],
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "icon": "public/logo.ico",
@@ -99,6 +107,7 @@
       "runAfterFinish": true,
       "installerIcon": "public/logo.ico",
       "uninstallerIcon": "public/logo.ico",
+      "shortcutName": "Etheon",
       "license": false,
       "deleteAppDataOnUninstall": false,
       "differentialPackage": false

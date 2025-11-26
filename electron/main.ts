@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, Menu, nativeImage, dialog } from 'electron';
 import path from 'path';
 import { startServer, stopServer, serverProcess } from './utils/server';
 import { setupDatabase } from './utils/database';
@@ -9,23 +9,25 @@ const PORT = process.env.PORT || 3000;
 let mainWindow: BrowserWindow | null = null;
 
 function showErrorDialog(title: string, message: string) {
-    const { dialog } = require('electron');
     dialog.showErrorBox(title, message);
 }
 
 async function createWindow() {
     Menu.setApplicationMenu(null);
     
+    const iconExtension = process.platform === 'win32' ? 'logo.ico' : 'logo.png';
     const iconPath = isDev 
-        ? path.join(__dirname, '..', 'public', 'logo.ico')
-        : path.join(process.resourcesPath, 'app', 'public', 'logo.ico');
+        ? path.join(__dirname, '..', 'public', iconExtension)
+        : path.join(process.resourcesPath, 'public', iconExtension);
+    
+    const icon = nativeImage.createFromPath(iconPath);
     
     mainWindow = new BrowserWindow({
         width: 1400,
         height: 900,
         minWidth: 1024,
         minHeight: 768,
-        icon: iconPath,
+        icon: icon,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: false,
@@ -34,7 +36,7 @@ async function createWindow() {
         show: false,
         backgroundColor: '#ffffff',
         autoHideMenuBar: true,
-        title: 'Etheon - Product Management',
+        title: 'Etheon - Management',
     });
 
     mainWindow.once('ready-to-show', () => {
@@ -81,6 +83,10 @@ app.whenReady().then(async () => {
         console.log('[Main] App path:', app.getAppPath());
         console.log('[Main] User data:', app.getPath('userData'));
         console.log('[Main] Is packaged:', app.isPackaged);
+        
+        if (process.platform === 'win32') {
+            app.setAppUserModelId('com.etheon.productmanagement');
+        }
         
         await setupDatabase();
         await createWindow();
