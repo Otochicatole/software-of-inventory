@@ -20,7 +20,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onClose}>×</button>
-        {children}
+        <div className={styles.scrollableContent}>
+          {children}
+        </div>
       </div>
     </div>
   );

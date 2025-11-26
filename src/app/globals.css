@@ -23,3 +23,17 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(24px);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 4px;
+}
