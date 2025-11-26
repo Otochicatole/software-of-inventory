@@ -1,10 +1,12 @@
-import { spawn, ChildProcess } from 'child_process';
+import { spawn, ChildProcess, execSync } from 'child_process';
 import path from 'path';
 import { app } from 'electron';
 import fs from 'fs';
 import net from 'net';
 
 let serverProcess: ChildProcess | null = null;
+
+export { serverProcess };
 
 async function getAvailablePort(startPort: number): Promise<number> {
     return new Promise((resolve) => {
@@ -129,8 +131,35 @@ export async function startServer(port: number): Promise<number> {
 export function stopServer(): void {
     if (serverProcess) {
         console.log('[Server] Stopping Next.js server...');
-        serverProcess.kill();
+        const pid = serverProcess.pid;
+        
+        try {
+            if (process.platform === 'win32' && pid) {
+                console.log('[Server] Killing process tree on Windows, PID:', pid);
+                try {
+                    execSync(`taskkill /pid ${pid} /T /F`, { stdio: 'ignore' });
+                } catch (error) {
+                    console.log('[Server] Process already terminated or not found');
+                }
+            } else {
+                serverProcess.kill('SIGTERM');
+                
+                setTimeout(() => {
+                    if (serverProcess && !serverProcess.killed) {
+                        try {
+                            serverProcess.kill('SIGKILL');
+                        } catch (err) {
+                            console.log('[Server] Process already terminated');
+                        }
+                    }
+                }, 2000);
+            }
+        } catch (error) {
+            console.error('[Server] Error stopping server:', error);
+        }
+        
         serverProcess = null;
+        console.log('[Server] Server stopped');
     }
 }
 

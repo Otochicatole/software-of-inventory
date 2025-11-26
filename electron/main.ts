@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu } from 'electron';
 import path from 'path';
-import { startServer, stopServer } from './utils/server';
+import { startServer, stopServer, serverProcess } from './utils/server';
 import { setupDatabase } from './utils/database';
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -57,6 +57,8 @@ async function createWindow() {
     }
 
     mainWindow.on('closed', () => {
+        console.log('[Main] Window closed');
+        stopServer();
         mainWindow = null;
     });
 
@@ -92,14 +94,29 @@ app.whenReady().then(async () => {
 
 app.on('window-all-closed', () => {
     console.log('[Main] All windows closed');
+    stopServer();
     if (process.platform !== 'darwin') {
-        stopServer();
         app.quit();
     }
 });
 
-app.on('before-quit', () => {
+app.on('before-quit', (event) => {
     console.log('[Main] App quitting...');
+    
+    if (serverProcess) {
+        console.log('[Main] Server still running, stopping...');
+        event.preventDefault();
+        stopServer();
+        
+        setTimeout(() => {
+            console.log('[Main] Force quit');
+            app.exit(0);
+        }, 2000);
+    }
+});
+
+app.on('will-quit', () => {
+    console.log('[Main] App will quit...');
     stopServer();
 });
 
