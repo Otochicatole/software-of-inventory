@@ -34,7 +34,7 @@
     gap: 6px;
     padding: 6px 12px;
     background: white;
-    border: 2px solid #667eea;
+    border: 2px solid #3b82f6;
     border-radius: 20px;
     font-size: 13px;
     transition: all 0.2s ease;
@@ -48,7 +48,7 @@
 
 .filterLabel {
     font-weight: 600;
-    color: #667eea;
+    color: #3b82f6;
 }
 
 .filterValue {

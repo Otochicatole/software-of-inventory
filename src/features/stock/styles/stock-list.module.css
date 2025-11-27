@@ -42,7 +42,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         color: white;
 
         tr th {
@@ -137,7 +137,7 @@
 .categoryBadge {
     font-size: 11px;
     color: #ffffff;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     padding: 4px 10px;
     border-radius: 12px;
     white-space: nowrap;
