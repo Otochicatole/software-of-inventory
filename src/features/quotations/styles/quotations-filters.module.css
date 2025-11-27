@@ -20,17 +20,17 @@
     white-space: nowrap;
 
     &:hover {
-        border-color: #10b981;
+        border-color: #0ea5e9;
         background: #f9fafb;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
     }
 
     &.active {
-        border-color: #10b981;
-        background: #d1fae5;
-        color: #10b981;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        border-color: #0ea5e9;
+        background: #e0f2fe;
+        color: #0ea5e9;
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
     }
 
     @media (max-width: 768px) {
@@ -39,7 +39,7 @@
 }
 
 .badge {
-    color: #10b981;
+    color: #0ea5e9;
     font-size: 20px;
     line-height: 1;
     margin-left: 4px;
@@ -118,6 +118,11 @@
     gap: 16px;
 }
 
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
 .dateInputGroup {
     display: flex;
     flex-direction: column;
@@ -133,6 +138,66 @@
     gap: 8px;
 }
 
+.textInput {
+    padding: 10px 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1f2937;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &:focus {
+        outline: none;
+        border-color: #0ea5e9;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    }
+
+    &::placeholder {
+        color: #9ca3af;
+    }
+}
+
+.statusButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.statusButton {
+    padding: 10px 12px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+        background: #f3f4f6;
+        border-color: #d1d5db;
+    }
+
+    &.statusActive {
+        background: #0ea5e9;
+        border-color: #0ea5e9;
+        color: white;
+
+        &.pending {
+            background: #f59e0b;
+            border-color: #f59e0b;
+        }
+
+        &.approved {
+            background: #10b981;
+            border-color: #10b981;
+        }
+    }
+}
+
 .dateInput {
     padding: 10px 12px;
     border: 2px solid #e5e7eb;
@@ -143,8 +208,8 @@
 
     &:focus {
         outline: none;
-        border-color: #10b981;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        border-color: #0ea5e9;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
     }
 
     &::-webkit-calendar-picker-indicator {
@@ -168,4 +233,3 @@
         flex: 1;
     }
 }
-

@@ -1,14 +1,16 @@
-import { Sale } from "@/core/types/sale";
-import styles from "../styles/sales-list.module.css";
+"use client";
+
+import { Quotation } from "@/core/types/quotation";
+import styles from "../styles/quotations-list.module.css";
 import { Trash2, Eye } from "lucide-react";
 
-interface SalesListProps {
-    sales: Sale[];
+interface QuotationsListProps {
+    quotations: Quotation[];
     onDelete?: (id: number) => void;
-    onViewDetails?: (sale: Sale) => void;
+    onViewDetails?: (quotation: Quotation) => void;
 }
 
-export default function SalesList({ sales, onDelete, onViewDetails }: SalesListProps) {
+export default function QuotationsList({ quotations, onDelete, onViewDetails }: QuotationsListProps) {
     const formatDate = (date: string | Date) => {
         const d = new Date(date);
         return d.toLocaleString('es-AR', {
@@ -25,20 +27,21 @@ export default function SalesList({ sales, onDelete, onViewDetails }: SalesListP
         onDelete?.(id);
     };
 
-    const handleViewDetails = (sale: Sale) => {
-        onViewDetails?.(sale);
+    const handleViewDetails = (quotation: Quotation) => {
+        onViewDetails?.(quotation);
     };
 
-    const handleRowClick = (sale: Sale) => {
-        handleViewDetails(sale);
+    const handleRowClick = (quotation: Quotation) => {
+        handleViewDetails(quotation);
     };
 
     return (
         <div className={styles.tableContainer}>
-            <table className={styles.salesTable}>
+            <table className={styles.quotationsTable}>
                 <thead>
                     <tr>
                         <th className={styles.alignCenter}>ID</th>
+                        <th className={styles.alignLeft}>Referencia</th>
                         <th className={styles.alignLeft}>Fecha y Hora</th>
                         <th className={styles.alignCenter}>Productos</th>
                         <th className={styles.alignCenter}>Total</th>
@@ -47,45 +50,48 @@ export default function SalesList({ sales, onDelete, onViewDetails }: SalesListP
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.map((sale) => (
+                    {quotations.map((quotation) => (
                         <tr 
-                            key={sale.id} 
-                            className={styles.salesRow}
-                            onClick={() => handleRowClick(sale)}
+                            key={quotation.id} 
+                            className={styles.quotationsRow}
+                            onClick={() => handleRowClick(quotation)}
                         >
-                            <td className={styles.saleId}>#{sale.id}</td>
-                            <td className={styles.saleDate}>
-                                {formatDate(sale.date)}
+                            <td className={styles.quotationId}>#{quotation.id}</td>
+                            <td className={styles.quotationReference}>
+                                {quotation.reference}
                             </td>
-                            <td className={styles.saleItems}>
+                            <td className={styles.quotationDate}>
+                                {formatDate(quotation.date)}
+                            </td>
+                            <td className={styles.quotationItems}>
                                 <span className={styles.itemsCount}>
-                                    {sale.items.length} {sale.items.length === 1 ? 'producto' : 'productos'}
+                                    {quotation.items.length} {quotation.items.length === 1 ? 'producto' : 'productos'}
                                 </span>
                             </td>
-                            <td className={styles.saleTotal}>
-                                ${sale.totalAmount.toFixed(2)}
+                            <td className={styles.quotationTotal}>
+                                ${quotation.totalAmount.toFixed(2)}
                             </td>
-                            <td className={styles.saleStatus}>
-                                <span className={`${styles.statusBadge} ${sale.active ? styles.active : styles.inactive}`}>
-                                    {sale.active ? 'Activa' : 'Anulada'}
+                            <td className={styles.quotationStatus}>
+                                <span className={`${styles.statusBadge} ${quotation.active ? styles.approved : styles.pending}`}>
+                                    {quotation.active ? 'Aprobada' : 'Pendiente'}
                                 </span>
                             </td>
-                            <td className={styles.saleActions}>
+                            <td className={styles.quotationActions}>
                                 <button
                                     className={styles.viewButton}
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        handleViewDetails(sale);
+                                        handleViewDetails(quotation);
                                     }}
                                     title="Ver detalles"
                                 >
                                     <Eye size={16} />
                                 </button>
-                                {sale.active && (
+                                {!quotation.active && (
                                     <button
                                         className={styles.deleteButton}
-                                        onClick={(e) => handleDelete(e, sale.id)}
-                                        title="Anular venta"
+                                        onClick={(e) => handleDelete(e, quotation.id)}
+                                        title="Eliminar cotización"
                                     >
                                         <Trash2 size={16} />
                                     </button>
@@ -95,9 +101,9 @@ export default function SalesList({ sales, onDelete, onViewDetails }: SalesListP
                     ))}
                 </tbody>
             </table>
-            {sales.length === 0 && (
+            {quotations.length === 0 && (
                 <div className={styles.emptyState}>
-                    <p>No hay ventas registradas</p>
+                    <p>No hay cotizaciones registradas</p>
                 </div>
             )}
         </div>

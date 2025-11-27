@@ -101,37 +101,37 @@ export default function FormAddStock({ onSuccess }: FormAddStockProps) {
                     onChange={handleChange}
                     validate={(value) => validator.validate(value)}
                 />
-            <Input
-                required
-                name="price"
-                type="number"
-                placeholder="Precio"
-                value={formData.price}
-                onChange={handleChange}
-            />
-            <Textarea
-                label="Descripción (opcional)"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                placeholder="Descripción del producto (opcional)"
-            />
-            <Input
-                required
-                name="stock"
-                type="number"
-                placeholder="Stock"
-                value={formData.stock}
-                onChange={handleChange}
-            />
-            <Select
-                label="Categoría"
-                name="category"
-                options={categoryOptions}
-                value={formData.categoryIds[0] || ""}
-                onChange={handleChange}
-                placeholder="Selecciona una categoría"
-            />
+                <Input
+                    required
+                    name="price"
+                    type="number"
+                    placeholder="Precio"
+                    value={formData.price}
+                    onChange={handleChange}
+                />
+                <Textarea
+                    label="Descripción (opcional)"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    placeholder="Descripción del producto (opcional)"
+                />
+                <Input
+                    required
+                    name="stock"
+                    type="number"
+                    placeholder="Stock"
+                    value={formData.stock}
+                    onChange={handleChange}
+                />
+                <Select
+                    label="Categoría"
+                    name="category"
+                    options={categoryOptions}
+                    value={formData.categoryIds[0] || ""}
+                    onChange={handleChange}
+                    placeholder="Selecciona una categoría"
+                />
                 <Button type="submit" variant="success" fullWidth>
                     Guardar Producto
                 </Button>

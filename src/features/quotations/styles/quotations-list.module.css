@@ -8,7 +8,7 @@
     }
 }
 
-.salesTable {
+.quotationsTable {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
@@ -17,7 +17,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     thead {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
         color: white;
 
         tr th {
@@ -55,7 +55,7 @@
             transition: all 0.2s ease;
 
             &:hover {
-                background: #d1fae5;
+                background: #e0f2fe;
             }
 
             &:last-child {
@@ -77,22 +77,23 @@
     }
 }
 
-.salesRow {
-    /* Styles defined in tbody tr */
-}
-
-.saleId {
+.quotationId {
     font-weight: 700;
-    color: #10b981;
+    color: #0284c7;
     font-size: 16px;
     text-align: center !important;
 }
 
-.saleDate {
+.quotationDate {
     color: #4b5563;
 }
 
-.saleItems {
+.quotationReference {
+    color: #374151;
+    font-weight: 500;
+}
+
+.quotationItems {
     text-align: center !important;
 }
 
@@ -106,14 +107,14 @@
     color: #374151;
 }
 
-.saleTotal {
+.quotationTotal {
     font-weight: 700;
-    color: #059669;
+    color: #0284c7;
     font-size: 16px;
     text-align: center !important;
 }
 
-.saleStatus {
+.quotationStatus {
     text-align: center !important;
 }
 
@@ -127,7 +128,17 @@
     letter-spacing: 0.5px;
 
     &.active {
+        background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        color: white;
+    }
+
+    &.approved {
         background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+    }
+
+    &.pending {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         color: white;
     }
 
@@ -137,7 +148,7 @@
     }
 }
 
-.saleActions {
+.quotationActions {
     display: flex;
     gap: 8px;
     justify-content: center;
@@ -148,7 +159,7 @@
 .viewButton {
     background: none;
     border: none;
-    color: #10b981;
+    color: #0284c7;
     cursor: pointer;
     padding: 8px;
     border-radius: 6px;
@@ -158,7 +169,7 @@
     justify-content: center;
 
     &:hover {
-        background-color: #d1fae5;
+        background-color: #e0f2fe;
         transform: scale(1.1);
     }
 }

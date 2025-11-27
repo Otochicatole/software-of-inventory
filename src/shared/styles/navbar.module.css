@@ -1,12 +1,13 @@
 .navbar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
     z-index: 1000;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .container {
@@ -30,9 +31,9 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    color: white;
+    color: #1f2937;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px;
 
     @media (max-width: 768px) {
         font-size: 18px;
@@ -64,26 +65,27 @@
     gap: 8px;
     padding: 10px 20px;
     border-radius: 8px;
-    color: rgba(255, 255, 255, 0.85);
+    color: #6b7280;
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
     transition: all 0.2s ease;
-    background: rgba(255, 255, 255, 0.1);
+    background: transparent;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
+        background: #f3f4f6;
+        color: #374151;
         transform: translateY(-2px);
     }
 
     &.active {
-        background: white;
-        color: #667eea;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 
         &:hover {
             transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
         }
     }
 

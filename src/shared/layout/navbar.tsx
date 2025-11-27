@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Package, TrendingUp } from "lucide-react";
+import { Package, TrendingUp, FileText } from "lucide-react";
 import styles from "../styles/navbar.module.css";
 
 export default function Navbar() {
@@ -18,6 +18,11 @@ export default function Navbar() {
             href: "/sales",
             label: "Ventas",
             icon: TrendingUp,
+        },
+        {
+            href: "/quotations",
+            label: "Cotizaciones",
+            icon: FileText,
         },
     ];
 

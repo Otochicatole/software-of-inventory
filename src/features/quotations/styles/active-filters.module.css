@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.filtersGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filterTag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: white;
+    border: 2px solid #0ea5e9;
+    border-radius: 20px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #e0f2fe;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+    }
+
+    &.pendingTag {
+        border-color: #f59e0b;
+
+        &:hover {
+            background: #fef3c7;
+        }
+    }
+
+    &.approvedTag {
+        border-color: #10b981;
+
+        &:hover {
+            background: #d1fae5;
+        }
+    }
+}
+
+.filterValue {
+    color: #374151;
+    font-weight: 600;
+}
+
+.removeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    margin-left: 2px;
+
+    &:hover {
+        background: #fee2e2;
+        color: #ef4444;
+        transform: scale(1.1);
+    }
+}
+
