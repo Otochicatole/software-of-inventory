@@ -14,6 +14,7 @@
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -25,6 +26,7 @@
         opacity: 1;
         transform: translateY(0);
     }
+
     to {
         opacity: 0;
         transform: translateY(-10px);
@@ -253,13 +255,42 @@
 }
 
 /* Stagger animation para las filas */
-.stockTable tbody tr:nth-child(1) { animation-delay: 0s; }
-.stockTable tbody tr:nth-child(2) { animation-delay: 0.05s; }
-.stockTable tbody tr:nth-child(3) { animation-delay: 0.1s; }
-.stockTable tbody tr:nth-child(4) { animation-delay: 0.15s; }
-.stockTable tbody tr:nth-child(5) { animation-delay: 0.2s; }
-.stockTable tbody tr:nth-child(6) { animation-delay: 0.25s; }
-.stockTable tbody tr:nth-child(7) { animation-delay: 0.3s; }
-.stockTable tbody tr:nth-child(8) { animation-delay: 0.35s; }
-.stockTable tbody tr:nth-child(9) { animation-delay: 0.4s; }
-.stockTable tbody tr:nth-child(10) { animation-delay: 0.45s; }
+.stockTable tbody tr:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.stockTable tbody tr:nth-child(2) {
+    animation-delay: 0.05s;
+}
+
+.stockTable tbody tr:nth-child(3) {
+    animation-delay: 0.1s;
+}
+
+.stockTable tbody tr:nth-child(4) {
+    animation-delay: 0.15s;
+}
+
+.stockTable tbody tr:nth-child(5) {
+    animation-delay: 0.2s;
+}
+
+.stockTable tbody tr:nth-child(6) {
+    animation-delay: 0.25s;
+}
+
+.stockTable tbody tr:nth-child(7) {
+    animation-delay: 0.3s;
+}
+
+.stockTable tbody tr:nth-child(8) {
+    animation-delay: 0.35s;
+}
+
+.stockTable tbody tr:nth-child(9) {
+    animation-delay: 0.4s;
+}
+
+.stockTable tbody tr:nth-child(10) {
+    animation-delay: 0.45s;
+}
