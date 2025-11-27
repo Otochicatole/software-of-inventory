@@ -37,7 +37,7 @@ export default function QuotationsList({ quotations, onDelete, onViewDetails }: 
 
     return (
         <div className={styles.tableContainer}>
-            <table className={styles.quotationsTable}>
+            <table className={styles.quotationsTable} key={quotations.length}>
                 <thead>
                     <tr>
                         <th className={styles.alignCenter}>ID</th>

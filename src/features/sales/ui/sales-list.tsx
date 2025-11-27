@@ -35,7 +35,7 @@ export default function SalesList({ sales, onDelete, onViewDetails }: SalesListP
 
     return (
         <div className={styles.tableContainer}>
-            <table className={styles.salesTable}>
+            <table className={styles.salesTable} key={sales.length}>
                 <thead>
                     <tr>
                         <th className={styles.alignCenter}>ID</th>
